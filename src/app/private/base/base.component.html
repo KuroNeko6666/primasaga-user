@@ -1,0 +1,120 @@
+<div class="h-screen w-screen text-[14px] relative">
+  <div class="flex flex-col h-screen">
+    <div class="bg-[#e44d3a] h-[150px] md:h-[56px]">
+      <div
+        class="flex flex-col md:flex-row place-items-center md:gap-[20px] h-full px-[15px] 2xl:px-[10px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] mx-auto">
+        <div class="bg-[url('/assets/images/logo.png')] h-[34px] w-[34px] my-[10px] md:my-0"></div>
+        <div class="w-full md:w-[280px] h-fit bg-white rounded">
+          <form class="flex flex-row w-full">
+            <input type="text"
+              class="flex-1 h-[38px] py-0 px-[10px] focus:outline-none focus:ring-0 bg-transparent border-none rounded-l  text-[12px] placeholder:text-[#b2b2b2]"
+              placeholder="Search..">
+            <button class="h-[38px] w-[38px] bg-[#efefef] hover:bg-[#cdcdcd] rounded-r text-[#e44d3a]">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+        <ul class="flex-1 hidden xl:flex flex-row justify-end text-white">
+
+          <ng-container *ngFor="let item of menu; let i = index" >
+            <li class="hover:bg-[#c34231] transition-all h-[56px]" (mouseenter)="item.children.length > 0 ? collapseToggler(i, true) : null" (mouseleave)="item.children.length > 0 ? collapseToggler(i, false) : null">
+              <button class="p-[13px] gap-[2px] flex flex-col place-items-center justify-end h-full" >
+                <img [src]="item.icon" alt="">
+                <span>{{ item.name }}</span>
+              </button>
+
+              <ul class="absolute z-10 bg-[#e44d3a] min-w-[200px] py-2"  *ngIf="item.children.length > 0 && item.active">
+                <ng-container *ngFor="let subitem of item.children">
+                  <li class="hover:bg-[#c34231] transition-all">
+                    <button class="py-3 px-4 gap-[2px] flex flex-col">
+                      <span>{{ subitem.name }}</span>
+                    </button>
+                  </li>
+                </ng-container>
+              </ul>
+
+            </li>
+          </ng-container>
+
+          <li class="hover:bg-[#c34231] transition-all h-[56px]">
+            <button class="p-[16px] gap-[2px] flex flex-col place-items-center h-full">
+              <img src="/assets/images/icon6.png" alt="">
+              <span>Messages</span>
+            </button>
+          </li>
+          <li class="hover:bg-[#c34231] transition-all h-[56px]">
+            <button class="p-[13px] gap-[2px] flex flex-col place-items-center h-full">
+              <img src="/assets/images/icon7.png" alt="">
+              <span>Notification</span>
+            </button>
+          </li>
+        </ul>
+        <div class="flex-1 hidden md:block xl:hidden"></div>
+        <div class="flex flex-row w-full md:w-fit justify-between md:justify-start">
+          <button
+            class="hover:bg-[#c34231] transition-all border-x-[0.1px] border-[#c34231] flex flex-row place-items-center p-[13px] gap-[10px] text-white">
+            <div class="w-[30px] h-[30px] rounded-full bg-slate-200"></div>
+            <div class="flex flex-row gap-1">
+              <span>Jhon</span>
+              <i class="fa-solid fa-caret-down"></i>
+            </div>
+          </button>
+          <button class="hover:bg-[#c34231] transition-all h-[56px] p-[13px] text-xl text-white xl:hidden"
+            (click)="openSidebar()">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col flex-1 overflow-y-auto">
+      <router-outlet class="flex-shrink-0"></router-outlet>
+    </div>
+  </div>
+  <div class="fixed z-20 top-0 duration-500 transition-all w-[200px] h-full bg-[#e44d3a] shadow text-white"
+    [ngClass]="sidebar ? 'left-0' : '-left-full'">
+    <ul class="py-[15px] flex flex-col">
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all ">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon1.png" alt="">
+          <span>Home</span>
+        </button>
+      </li>
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all flex">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon2.png" alt="">
+          <span>Companies</span>
+        </button>
+      </li>
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all flex">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon3.png" alt="">
+          <span>Projects</span>
+        </button>
+      </li>
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all flex">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon4.png" alt="">
+          <span>Profiles</span>
+        </button>
+      </li>
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all flex">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon5.png" alt="">
+          <span>Jobs</span>
+        </button>
+      </li>
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all flex">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon6.png" alt="">
+          <span>Messages</span>
+        </button>
+      </li>
+      <li class="px-[20px] py-[12px] hover:bg-[#c34231] transition-all flex">
+        <button class="flex flex-row gap-3">
+          <img src="/assets/images/icon7.png" alt="">
+          <span>Notification</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

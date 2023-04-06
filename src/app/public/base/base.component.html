@@ -1,0 +1,91 @@
+<div class="h-screen w-screen bg-[#e75348] text-[14px] select-none overflow-y-auto relative">
+  <div class="flex flex-col space-y-[70px] h-fit pt-[60px] md:pt-[100px] pb-[60px] md:pb-[20px]">
+
+    <div class="bg-white shadow rounded w-[374px] md:w-[780px]  xl:w-[870px] relative mx-auto">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 h-fit xl:h-full">
+        <div class="h-full border-r border-slate-100 px-[15px]">
+          <div class="flex flex-col px-[20px] pt-[40px] pb-0 xl:px-[5px] xl:pt-[70px] xl:pb-[92px] gap-[120px] ">
+            <div class=" xl:pl-[45px] space-y-[30px]">
+              <img src="/assets/images/cm-logo.png" alt="">
+              <p class="leading-6 text-[#666666]">Workwise, is a global freelancing platform and social networking where
+                businesses and independent professionals connect and collaborate remotely</p>
+            </div>
+            <img src="/assets/images/cm-main-img.png" alt="" class="pl-[10px] hidden xl:block">
+          </div>
+        </div>
+        <div class="h-full px-[15px]">
+          <div class="flex flex-col h-full py-[30px]">
+
+            <div class="flex flex-row xl:justify-end px-[20px] xl:px-[50px]" [ngClass]="mode ? 'xl:mb-[70px]' : 'xl:mb-[50px]'">
+              <button class="px-[10px] py-[7px] rounded-l " (click)="changeMode(true)" [ngClass]="mode ? 'text-white bg-[#e44d3a] hover:bg-[#cb3622]' : 'text-black bg-[#e5e5e5] hover:bg-[#feb1a7]'">Sign in</button>
+              <button class="px-[10px] py-[7px] rounded-r " (click)="changeMode(false)" [ngClass]="!mode ? 'text-white bg-[#e44d3a] hover:bg-[#cb3622]' : 'text-black bg-[#e5e5e5] hover:bg-[#feb1a7]'">Sign up</button>
+            </div>
+
+            <!-- LOGIN PAGE -->
+            <app-login [show]="mode"></app-login>
+
+            <!-- REGISTER PAGE -->
+
+            <app-register [show]="mode"></app-register>
+
+          </div>
+        </div>
+      </div>
+      <div class="absolute left-14 -top-4">
+        <div class="w-[30px] h-[30px] rounded-full bg-white"></div>
+      </div>
+      <div class="absolute  left-11 -top-9">
+        <div class="w-[20px] h-[20px] rounded-full bg-white"></div>
+      </div>
+      <div class="absolute right-14 -bottom-4">
+        <div class="w-[30px] h-[30px] rounded-full bg-white"></div>
+      </div>
+      <div class="absolute  right-11 -bottom-9">
+        <div class="w-[20px] h-[20px] rounded-full bg-white"></div>
+      </div>
+    </div>
+
+    <div class="flex flex-col xl:flex-row mx-auto text-white gap-24">
+      <ul class="flex flex-row gap-2 tracking-wide ">
+        <li class=" cursor-pointer hover:text-slate-200">
+          Help Center |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          About |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Privacy Policy |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Comunity Guidelines |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Cookies Policy |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Career |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Forum |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Language |
+        </li>
+        <li class=" cursor-pointer hover:text-slate-200">
+          Copyright Policy
+        </li>
+      </ul>
+      <span><i class="fa-solid fa-copyright"></i> Copyright 2023</span>
+    </div>
+
+  </div>
+  <!-- <div class="absolute top-2 right-2">
+    <div class="bg-white shadow rounded px-5 py-4 border-l-4 border-green-500">
+      <div class="flex flex-row place-items-center gap-2">
+        <i class="fa-solid fa-bell"></i>
+        <span>some notification here.</span>
+      </div>
+    </div>
+  </div> -->
+</div>

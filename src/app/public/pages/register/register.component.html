@@ -1,0 +1,115 @@
+<div class="pl-[20px] pr-[20px] xl:pl-[60px] xl:pr-[75px] flex flex-col gap-5" *ngIf="!show">
+
+  <div class="flex flex-col gap-[15px] place-items-center justify-center border rounded py-[15px]">
+    <span>Select your account type</span>
+    <div class="flex flex-row">
+      <button type="button" class="px-[15px] py-[10px] rounded-l" (click)="changeRole(true)" [ngClass]="role ? 'text-white bg-[#e44d3a] hover:bg-[#cb3622]' : 'text-black bg-[#e5e5e5] hover:bg-[#feb1a7]'">User</button>
+      <button type="button" class="px-[15px] py-[10px] rounded-r" (click)="changeRole(false)" [ngClass]="!role ? 'text-white bg-[#e44d3a] hover:bg-[#cb3622]' : 'text-black bg-[#e5e5e5] hover:bg-[#feb1a7]'">Company</button>
+    </div>
+  </div>
+
+  <form  [formGroup]="form.group" class="flex flex-col gap-5" *ngIf="role" (submit)="register('user')">
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded" [ngClass]="form.name?.hasError('required') && form.name?.touched ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-user text-[#666666] px-4 text-xs"></i>
+        <input type="text"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Name" formControlName="name">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.name?.hasError('required') && form.name?.touched">* name is required</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded" [ngClass]="form.username?.hasError('required') && form.username?.touched ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-user text-[#666666] px-4 text-xs"></i>
+        <input type="text"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Username" formControlName="username">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.username?.hasError('required') && form.username?.touched">* username is required</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded"  [ngClass]="(form.email?.hasError('required') && form.email?.touched ) || form.email?.hasError('email') ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-envelope text-[#666666] px-4 text-xs"></i>
+        <input type="text"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Email" formControlName="email">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.email?.hasError('required') && form.email?.touched">* email is required</span>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.email?.hasError('email')">* email is invalid</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded" [ngClass]="(form.password?.hasError('required') && form.password?.touched ) || form.password?.hasError('minlength') ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-lock text-[#666666] px-4 text-xs"></i>
+        <input type="password"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Password" formControlName="password">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.password?.hasError('required') && form.password?.touched">* password is required</span>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.password?.hasError('minlength')">* password must have at least 8 characters</span>
+    </div>
+    <div class="flex flex-row justify-between place-items-center py-2">
+      <div class="flex flex-row gap-2">
+        <input type="checkbox" id="remember"
+          class="checked:bg-[#e44d3a] text-[#e44d3a] rounded-full focus:ring-0 focus:ring-offset-0 border-[#e5e5e5] cursor-pointer" formControlName="allow">
+        <label for="remember" class="hover:text-[#e44d3a] cursor-pointer text-[13px] leading-5">Yes, I
+          understand and agree to the workwise Terms & Conditions.</label>
+      </div>
+    </div>
+    <div class="">
+      <button type="submit" class="px-[27px] py-[12px] text-white bg-[#e44d3a] hover:bg-[#cb3622] rounded text-[16px]" [disabled]="loading">{{ loading ? 'Loading...' : 'Get Started' }}</button>
+    </div>
+  </form>
+
+  <form (submit)="register('company')" class="flex flex-col gap-5" *ngIf="!role" [formGroup]="form.group">
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded" [ngClass]="form.name?.hasError('required') && form.name?.touched ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-building text-[#666666] px-4 text-xs"></i>
+        <input type="text"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Company name" formControlName="name">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.name?.hasError('required') && form.name?.touched">* name is required</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded" [ngClass]="form.username?.hasError('required') && form.username?.touched ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-building text-[#666666] px-4 text-xs"></i>
+        <input type="text"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Company username" formControlName="username">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.username?.hasError('required') && form.username?.touched">* username is required</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded"  [ngClass]="(form.email?.hasError('required') && form.email?.touched ) || form.email?.hasError('email') ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-envelope text-[#666666] px-4 text-xs"></i>
+        <input type="text"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Email" formControlName="email">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.email?.hasError('required') && form.email?.touched">* email is required</span>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.email?.hasError('email')">* email is invalid</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row place-items-center border rounded" [ngClass]="(form.password?.hasError('required') && form.password?.touched ) || form.password?.hasError('minlength') ? 'border-[#e44d3a]' : 'border-[#e5e5e5]'">
+        <i class="fa-solid fa-lock text-[#666666] px-4 text-xs"></i>
+        <input type="password"
+          class="text-[#666666] leading-[40px] flex-1 focus:outline-none focus:ring-0 border-0 p-0 text-[14px] placeholder:text-[#b2b2b2]"
+          placeholder="Company password" formControlName="password">
+      </div>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.password?.hasError('required') && form.password?.touched">* password is required</span>
+      <span class="text-xs text-red-500 leading-none" *ngIf="form.password?.hasError('minlength')">* password must have at least 8 characters</span>
+    </div>
+    <div class="flex flex-row justify-between place-items-center py-2">
+      <div class="flex flex-row gap-2">
+        <input type="checkbox" id="remember"
+          class="checked:bg-[#e44d3a] text-[#e44d3a] rounded-full focus:ring-0 focus:ring-offset-0 border-[#e5e5e5] cursor-pointer">
+        <label for="remember" class="hover:text-[#e44d3a] cursor-pointer text-[13px] leading-5">Yes, I
+          understand and agree to the workwise Terms & Conditions.</label>
+      </div>
+    </div>
+    <div class="">
+      <button type="submit" class="px-[27px] py-[12px] text-white rounded text-[16px]" [ngClass]="loading ? 'bg-slate-400' : ' bg-[#e44d3a] hover:bg-[#cb3622]'"  [disabled]="loading">{{ loading ? 'Loading...' : 'Get Started' }}</button>
+    </div>
+  </form>
+
+</div>
