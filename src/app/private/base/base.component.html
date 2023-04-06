@@ -54,7 +54,7 @@
         <div class="flex-1 hidden md:block xl:hidden"></div>
         <div class="flex flex-row w-full md:w-fit justify-between md:justify-start">
           <div class="relative">
-            <button
+            <button (click)="openProfile()"
               class="hover:bg-[#c34231] transition-all border-x-[0.1px] border-[#c34231] flex flex-row place-items-center p-[13px] gap-[10px] text-white">
               <div class="w-[30px] h-[30px] rounded-full bg-slate-200"></div>
               <div class="flex flex-row gap-1">
@@ -62,7 +62,7 @@
                 <i class="fa-solid fa-caret-down"></i>
               </div>
             </button>
-            <div class="bg-white shadow absolute z-10 top-full right-0 w-[240px]">
+            <div class="bg-white shadow absolute z-10 top-full right-0 w-[240px]" *ngIf="profile">
               <div class="flex flex-col px-[20px] py-[15px] border-y">
                 <span class="text-[16px] font-semibold">Setting</span>
               </div>

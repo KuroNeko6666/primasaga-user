@@ -11,6 +11,7 @@ import { NavigatorService } from 'src/app/shared/services/navigator.service';
 export class BaseComponent {
 
   public sidebar: boolean = false
+  public profile: boolean = false
   public menu?: any
 
   constructor(
@@ -40,5 +41,9 @@ export class BaseComponent {
 
   logout(){
     this.auth.logout()
+  }
+
+  openProfile(){
+    this.profile = !this.profile
   }
 }
