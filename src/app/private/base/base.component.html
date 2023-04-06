@@ -16,14 +16,16 @@
         </div>
         <ul class="flex-1 hidden xl:flex flex-row justify-end text-white">
 
-          <ng-container *ngFor="let item of menu; let i = index" >
-            <li class="hover:bg-[#c34231] transition-all h-[56px]" (mouseenter)="item.children.length > 0 ? collapseToggler(i, true) : null" (mouseleave)="item.children.length > 0 ? collapseToggler(i, false) : null">
-              <button class="p-[13px] gap-[2px] flex flex-col place-items-center justify-end h-full" >
+          <ng-container *ngFor="let item of menu; let i = index">
+            <li class="hover:bg-[#c34231] transition-all h-[56px]" [ngClass]="{'bg-[#c34231]': item.active}"
+              (mouseenter)="item.children.length > 0 ? collapseToggler(i, true) : null"
+              (mouseleave)="item.children.length > 0 ? collapseToggler(i, false) : null">
+              <button class="p-[13px] gap-[2px] flex flex-col place-items-center justify-end h-full">
                 <img [src]="item.icon" alt="">
                 <span>{{ item.name }}</span>
               </button>
 
-              <ul class="absolute z-10 bg-[#e44d3a] min-w-[200px] py-2"  *ngIf="item.children.length > 0 && item.active">
+              <ul class="absolute z-10 bg-[#e44d3a] min-w-[200px] py-2" *ngIf="item.children.length > 0 && item.active">
                 <ng-container *ngFor="let subitem of item.children">
                   <li class="hover:bg-[#c34231] transition-all">
                     <button class="py-3 px-4 gap-[2px] flex flex-col">
@@ -51,14 +53,30 @@
         </ul>
         <div class="flex-1 hidden md:block xl:hidden"></div>
         <div class="flex flex-row w-full md:w-fit justify-between md:justify-start">
-          <button
-            class="hover:bg-[#c34231] transition-all border-x-[0.1px] border-[#c34231] flex flex-row place-items-center p-[13px] gap-[10px] text-white">
-            <div class="w-[30px] h-[30px] rounded-full bg-slate-200"></div>
-            <div class="flex flex-row gap-1">
-              <span>Jhon</span>
-              <i class="fa-solid fa-caret-down"></i>
+          <div class="relative">
+            <button
+              class="hover:bg-[#c34231] transition-all border-x-[0.1px] border-[#c34231] flex flex-row place-items-center p-[13px] gap-[10px] text-white">
+              <div class="w-[30px] h-[30px] rounded-full bg-slate-200"></div>
+              <div class="flex flex-row gap-1">
+                <span>Jhon</span>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+            </button>
+            <div class="bg-white shadow absolute z-10 top-full right-0 w-[240px]">
+              <div class="flex flex-col px-[20px] py-[15px] border-y">
+                <span class="text-[16px] font-semibold">Setting</span>
+              </div>
+              <ul>
+                <li class="px-[20px] py-[8px]">Account Settings</li>
+                <li class="px-[20px] py-[8px]">Privacy</li>
+                <li class="px-[20px] py-[8px]">Faqs</li>
+                <li class="px-[20px] py-[8px]">Terms & Conditions</li>
+              </ul>
+              <div class="flex flex-col px-[20px] py-[15px] border-y cursor-pointer select-none" (click)="logout()">
+                <span class="text-[16px] font-semibold text-center">Logout</span>
+              </div>
             </div>
-          </button>
+          </div>
           <button class="hover:bg-[#c34231] transition-all h-[56px] p-[13px] text-xl text-white xl:hidden"
             (click)="openSidebar()">
             <i class="fa-solid fa-bars"></i>

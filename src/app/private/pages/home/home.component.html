@@ -163,33 +163,34 @@
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
           </div>
-          <div class="flex flex-row h-[260px] p-[20px] overflow-x-hidden">
-            <ng-container *ngFor="let item of top">
-              <div
-                class="bg-white w-[153px] h-[220px] rounded-sm flex flex-col pt-[20px] flex-shrink-0 mx-[4px] transition-all transform duration-1000"
-                [ngClass]="translate">
-                <div class="flex flex-col place-items-center">
-                  <div class="h-[57px] w-[57px] bg-slate-200 rounded-full mb-[10px]"></div>
-                  <span class="text-[16px] mb-[5px]">{{ item.name }}</span>
-                  <span class="text-[#b2b2b2] mb-[15px]">{{ item.job }}</span>
-                  <div class="flex flex-row gap-1 text-[13px] mb-[15px]">
-                    <button
-                      class="px-[8px] rounded-sm py-[5px] text-white bg-green-500 hover:bg-green-600">Follow</button>
-                    <button class="px-[8px] rounded-sm py-[5px] text-white bg-red-500 hover:bg-red-600"><i
-                        class="fa-regular fa-envelope"></i></button>
-                    <button class="px-[8px] rounded-sm py-[5px] text-white bg-blue-400 hover:bg-blue-500">Hire</button>
+          <div class=" h-[260px] p-[20px] overflow-x-hidden ">
+            <div class="flex flex-row transition-all duration-500" [ngStyle]="{'transform': translate | async}">
+              <ng-container *ngFor="let item of data">
+                <div
+                  class="bg-white w-[153px] h-[220px] rounded-sm flex flex-col pt-[20px] flex-shrink-0 mx-[4px] ">
+                  <div class="flex flex-col place-items-center">
+                    <div class="h-[57px] w-[57px] bg-slate-200 rounded-full mb-[10px]"></div>
+                    <span class="text-[16px] mb-[5px]">{{ item.name }}</span>
+                    <span class="text-[#b2b2b2] mb-[15px]">{{ item.job }}</span>
+                    <div class="flex flex-row gap-1 text-[13px] mb-[15px]">
+                      <button
+                        class="px-[8px] rounded-sm py-[5px] text-white bg-green-500 hover:bg-green-600">Follow</button>
+                      <button class="px-[8px] rounded-sm py-[5px] text-white bg-red-500 hover:bg-red-600"><i
+                          class="fa-regular fa-envelope"></i></button>
+                      <button class="px-[8px] rounded-sm py-[5px] text-white bg-blue-400 hover:bg-blue-500">Hire</button>
+                    </div>
+                  </div>
+                  <div class="py-[15px] text-center font-semibold hover:bg-[#e44d3a] hover:text-white border-t">
+                    <span>View Profile</span>
                   </div>
                 </div>
-                <div class="py-[15px] text-center font-semibold hover:bg-[#e44d3a] hover:text-white border-t">
-                  <span>View Profile</span>
-                </div>
-              </div>
-            </ng-container>
+              </ng-container>
+            </div>
           </div>
           <button class="text-[#b2b2b2] hover:text-[#e44d3a] text-3xl absolute top-1/2 -translate-x-1/2 left-0"
-            (click)="changeTranslate()"><i class="fa-solid fa-circle-chevron-left"></i></button>
-          <button class="text-[#b2b2b2] hover:text-[#e44d3a] text-3xl absolute top-1/2 -translate-x-1/2 -right-5"
-            (click)="changeTranslate()"><i class="fa-solid fa-circle-chevron-right"></i></button>
+            (click)="slide(false)"><i class="fa-solid fa-circle-chevron-left"></i></button>
+          <button class="text-[#b2b2b2] hover:text-[#e44d3a] text-3xl absolute top-1/2 -translate-x-1/2 -right-7"
+            (click)="slide(true)"><i class="fa-solid fa-circle-chevron-right"></i></button>
         </div>
         <div class="bg-white shadow rounded-sm p-[20px]">
           <div class="flex flex-col">

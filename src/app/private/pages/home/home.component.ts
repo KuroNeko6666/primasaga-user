@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { Observable, Subject, map } from 'rxjs';
 
 const LOREM = 'Lorem dolorum soluta laudantium nesciunt nihil ducimus pariatur distinctio odio earum voluptatibus atque, quo assumenda! Quisquam corporis assumenda minima dolorum sunt harum perspiciatis. Doloremque atque ut sint architecto illo, maiores veniam unde libero facere, distinctio error, totam iusto optio perspiciatis voluptatem. Dicta veritatis debitis, vel nihil aspernatur voluptatibus ut. Impedit dolorem explicabo vero illo assumenda neque esse obcaecati veritatis, accusamus ut provident eum sequi culpa quo repellat ad fuga optio? Modi mollitia porro molestias, ad necessitatibus nam deleniti eligendi magnam laboriosam praesentium accusamus maiores optio enim, voluptates fugiat neque culpa perspiciatis in! Illo accusantium perferendis dolor, nihil aperiam esse? Nihil neque, sapiente saepe porro error laboriosam esse.'
 
@@ -37,57 +39,56 @@ const TOP_PROFILES = [
 export class HomeComponent {
 
   lorem: string = LOREM
-  top: any[] = TOP_PROFILES
   index: number = 0
-  translate?: string
-  translateNum: number = 0
+  translateSource = new Subject<any>()
   modalCreatePost: boolean = false
   viewMorePost: boolean = false
+
+  data = TOP_PROFILES
+
+  translate = this.translateSource.asObservable()
 
   openModalCreatePost(): void {
     this.modalCreatePost = !this.modalCreatePost
   }
 
+  constructor() { }
+
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.autoChangeTranslate()
+    this.autoSlide()
   }
 
   viewMoreToggle(): void {
     this.viewMorePost = !this.viewMorePost
   }
 
-  increase() {
-    this.index += 1
+  changeTop() {
+    this.data.push(this.data.splice(0, 1)[0]);
   }
 
-  autoChangeTranslate() {
-    setInterval(() => this.changeTranslate(), 3000)
-  }
-
-  changeTranslate() {
-    if (this.index == this.top.length) {
+  slide(bool: boolean) {
+    if (this.index == 3) {
       this.index = 0
-
-    }
-    this.index += 1
-
-    this.translateNum = 120
-    let decrease = 15
-    let now
-    if (this.index == 1) {
-      now = this.index * this.translateNum
-    } else if (this.index == 0) {
-      now = 0
     } else {
-      now = (this.index * this.translateNum) - (decrease * this.index) + 15
+      if (bool) {
+        this.index += 1
+      } else {
+        if (this.index == 0) {
+          this.index = 3
+        }
+        this.index -= 1
+      }
     }
+    // let translate = '-translate-x-[' + ( (161.5 * this.index) + 15.5 ) + '%]'
+    let translate = 'translate(-' + ( (161.5 * this.index) + 15.5 ) + 'px, 0)'
 
-    let trans = '-translate-x-[' + now + '%]'
-
-    this.translate = trans
+    this.translateSource.next(translate)
   }
 
+  autoSlide(){
+    setInterval(() => {
+      this.slide(true)
+    }, 3000)
+  }
 
 }

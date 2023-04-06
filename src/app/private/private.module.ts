@@ -21,7 +21,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class PrivateModule { }

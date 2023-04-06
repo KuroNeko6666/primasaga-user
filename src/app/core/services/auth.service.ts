@@ -7,6 +7,7 @@ import { API } from 'src/app/config/api.config';
 import { BaseModel } from 'src/app/shared/models/base.model';
 import { LoginModel } from 'src/app/shared/models/login.model';
 import { UserModel } from 'src/app/shared/models/user.model';
+import { Route, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'any'
@@ -17,11 +18,12 @@ export class AuthService {
   private path = API.auth
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
-  login(data: any) : Observable<BaseModel<UserModel>> {
-    return this.http.post<BaseModel<UserModel>>((this.url + this.path.login), data)
+  login(data: any) : Observable<BaseModel<LoginModel>> {
+    return this.http.post<BaseModel<LoginModel>>((this.url + this.path.login), data)
   }
 
   register(data: any) : Observable<BaseModel<string>> {
@@ -33,16 +35,16 @@ export class AuthService {
   // }
 
   check() : boolean{
-    console.log(localStorage.getItem("user"));
-
-    if (localStorage.getItem("user") != null) {
+    if (localStorage.getItem("token") != null) {
       return true
     }
+    localStorage.clear()
     return false
   }
 
   logout(): void {
     localStorage.clear()
+    this.router.navigateByUrl("/login")
   }
 
 }

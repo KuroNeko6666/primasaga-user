@@ -37,9 +37,9 @@ export class LoginService {
     })
   }
 
-  setLocal(data: UserModel): void {
-    // localStorage.setItem("token", data.token!)
-    localStorage.setItem("user", JSON.stringify(data))
+  setLocal(data: LoginModel): void {
+    localStorage.setItem("token", data.token!)
+    localStorage.setItem("user", JSON.stringify(data.user!))
   }
 
   ngOnDestroy(): void {
