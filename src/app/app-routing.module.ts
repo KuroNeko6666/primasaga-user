@@ -7,12 +7,12 @@ import { LogoutGuard } from './core/guards/logout.guard';
 const routes: Routes = [
   {
     path: "",
-    loadChildren: () => import('./private/private.module').then(m => m.PrivateModule),
+    loadChildren: () => import('./modules/private/private.module').then(m => m.PrivateModule),
     canActivate: [LoginGuard]
   },
   {
     path: "login",
-    loadChildren: () => import('./public/public.module').then(m => m.PublicModule),
+    loadChildren: () => import('./modules/public/public.module').then(m => m.PublicModule),
     canActivate: [LogoutGuard]
   },
   {

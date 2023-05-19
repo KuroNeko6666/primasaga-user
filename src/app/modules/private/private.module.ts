@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
+import { TopProfileComponent } from './components/top-profile/top-profile.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProjectsComponent } from './pages/projects/projects.component';
     HomeComponent,
     JobsComponent,
     ProjectComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    TopProfileComponent
   ],
   imports: [
     CommonModule,

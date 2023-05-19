@@ -7,10 +7,12 @@ import { CoreModule } from './core/core.module';
 import { ErrorModule } from './error/error.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { TopProfileComponent } from './modules/home/components/top-profile/top-profile.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopProfileComponent
   ],
   imports: [
     BrowserModule,
